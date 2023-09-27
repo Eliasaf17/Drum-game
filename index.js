@@ -3,12 +3,14 @@ var numberOfDrumButtons = document.getElementsByClassName("drum");
 for(var i = 0; i < numberOfDrumButtons.length; i++){
     numberOfDrumButtons[i].addEventListener("click", function(){
         makeSounds(this.innerHTML); /* This is the element which we target actually by clicking (numberOfDrumButtons[i])*/
+        buttonAnimation(this.innerHTML);
     });
 
 }
 
 document.addEventListener("keydown", function(event){   /* event show all the information about the keyboard event (keydown in this case)*/
     makeSounds(event.key)
+    buttonAnimation(event.key);
 });
 
 function makeSounds(key){
@@ -42,8 +44,17 @@ function makeSounds(key){
             var kick = new Audio('./sounds/kick-bass.mp3');
             kick.play();
             break;
-        default: console.log("Not valid drum");
+        default: console.log(key);
             break;
     }
+}
+
+function buttonAnimation(currentKey){
+
+    var button = document.querySelector("."+currentKey);
+    button.classList.toggle("pressed");
+    setTimeout(function (){
+        button.classList.toggle("pressed");
+    }, 150);
 }
 
